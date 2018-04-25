@@ -35,6 +35,13 @@ macro_rules! rustler_export_nifs {
                     $crate::codegen_runtime::handle_nif_init_call($on_load, env, load_info)
                 }
             }
+            
+            extern "C" fn nif_upgrade(_env: $crate::codegen_runtime::NIF_ENV,
+                                      _old: *mut *mut $crate::codegen_runtime::c_void,
+                                      _new: *mut *mut $crate::codegen_runtime::c_void,
+                                      _x: usize) -> i32 {
+                0
+            }
 
             const FUN_ENTRIES: &'static [$crate::codegen_runtime::DEF_NIF_FUNC] = &[
                 $(rustler_export_nifs!(internal_item_init, $exported_nif)),*
@@ -48,7 +55,7 @@ macro_rules! rustler_export_nifs {
                 funcs: FUN_ENTRIES.as_ptr(),
                 load: Some(nif_load),
                 reload: None,
-                upgrade: None,
+                upgrade: Some(nif_upgrade),
                 unload: None,
                 vm_variant: b"beam.vanilla\x00".as_ptr(),
                 options: 0,
