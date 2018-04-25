@@ -39,7 +39,7 @@ macro_rules! rustler_export_nifs {
             extern "C" fn nif_upgrade(_env: $crate::codegen_runtime::NIF_ENV,
                                       _old: *mut *mut $crate::codegen_runtime::c_void,
                                       _new: *mut *mut $crate::codegen_runtime::c_void,
-                                      _size: usize) -> i32 {
+                                      _x: usize) -> i32 {
                 0
             }
 
