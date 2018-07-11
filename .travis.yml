@@ -28,7 +28,7 @@ env:
 sudo: true
 
 before_install:
-  - curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain $RUST_TOOLCHAIN
+  - curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain $RUST_TOOLCHAIN -y
 
 install:
   - mix local.rebar --force
