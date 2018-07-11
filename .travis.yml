@@ -4,10 +4,22 @@ matrix:
   include:
     - otp_release: 19.3
       elixir: 1.4
+      env: RUST_TOOLCHAIN=stable
+    - otp_release: 19.3
+      elixir: 1.4
+      env: RUST_TOOLCHAIN=nightly
     - otp_release: 20.3
       elixir: 1.5
+      env: RUST_TOOLCHAIN=stable
+    - otp_release: 20.3
+      elixir: 1.5
+      env: RUST_TOOLCHAIN=nightly
     - otp_release: 21.0
       elixir: 1.6
+      env: RUST_TOOLCHAIN=stable
+    - otp_release: 21.0
+      elixir: 1.6
+      env: RUST_TOOLCHAIN=nightly
 
 env:
   global:
@@ -16,7 +28,7 @@ env:
 sudo: true
 
 before_install:
-  - curl https://static.rust-lang.org/rustup.sh | sh
+  - curl https://static.rust-lang.org/rustup.sh | sh -s -- --default-toolchain $RUST_TOOLCHAIN
 
 install:
   - mix local.rebar --force
